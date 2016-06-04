@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+h1 {
+	text-align:center;
+}
+div#game {
+	background:yellow;
+	border:#999 1px solid;
+	width:500px;
+	height:500px;
+	padding:50px;
+	margin:0px auto;
+}
+div#game > div {
+	border:red 1px solid;
+	width:50px;
+	height:50px;
+	float:left;
+	margin:10px;
+	padding:25px;
+	font-size:50px;
+	cursor:pointer;
+	text-align:center;
+}
+div#game_stats{
+	width :32px;
+	float : left;
+	color : blue;
+	font-size : 25px;
+	text-align: left;
+	margin-top : 12px;
+	
+}		
+
+</style>
+
+
+<script>
+
+var letters = ['A','A','B','B','C','C','D','D','E','E','F','F','G','G','H','H'];
+var values = [];
+var ids = [];
+var tiles_flipped = 0;
+var score = 0;
+var tries = 0;
+	function shuffle(array) {
+    var i = array.length,
+        j = 0,
+        temp;
+
+    while (i--) {
+
+        j = Math.floor(Math.random() * (i+1));
+
+        
+        temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+
+    }
+
+    return array;
+}
+
+var aa= shuffle(letters);
+function getItem(){
+	tiles_flipped = 0;
+	var output = '';
+    for(var i = 0; i < aa.length; i++){
+		output += '<div id="tile_'+i+'" onclick="flip(this,\''+aa[i]+'\')"></div>';
+	}
+	document.getElementById('game').innerHTML = output;
+}
+
+function flip(tile,value) {
+	if(tile.innerHTML == "" && values.length < 2) {
+		tile.style.background = 'red';
+		tile.innerHTML = value;
+		if(values.length == 0) {
+			values.push(value);
+			ids.push(tile.id);
+		} 
+	
+
+	else if(values.length == 1) {
+			values.push(value);
+			ids.push(tile.id);
+			
+			if(values[0] == values[1]) {
+				tiles_flipped += 2;
+				score += 1;
+				document.getElementById("score").innerHTML = "Score - "+score;
+				// Clear both arrays
+				values = [];
+            	ids = [];
+				if(tiles_flipped == aa.length) {
+					alert("Game Over");
+					document.getElementById('game').innerHTML = "";
+					getItem();
+				}
+			}
+			
+			else { 
+				function flip_back() {
+					var a = document.getElementById(ids[0]);
+				    var b = document.getElementById(ids[1]);
+				    a.innerHTML = "";
+					b.innerHTML = "";
+				    a.style.background ='yellow';
+					b.style.background ='yellow';
+					values = [];
+            	    ids = [];
+					tries +=1;
+					document.getElementById("tries").innerHTML = "Tries - "+tries;
+					
+				}
+				setTimeout(flip_back, 800);
+			}
+	
+		}		
+	}		
+}
+
+
+
+</script>
+</head>
+<body>
+<h1>MEMORY GAME</h1>
+<div id="game_stats">
+	<p id="score">Score - 0 </p>
+	<p id="tries">Tries - 0 </p>
+</div>
+<div id="game"></div>
+
+<script>getItem();</script>
+</body>
+</html>
+

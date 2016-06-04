@@ -1,0 +1,48 @@
+.my_story{
+	width : 30%;
+	margin-left : 2.5%;
+	padding-left:1%;
+	font-family :sans-serif;
+	color : #5F6A6A  ;
+	line-height:25px;
+	float:auto;
+}
+.my_story h1{
+	font-size:25px;
+	font-weight:bold;
+	color : #3498DB;
+}
+
+.personal_inf{
+	width : 30%;
+	margin-left : 2.5%;
+	margin-top : 60px;
+	padding-left:1%;
+	font-family :sans-serif;
+	color : #5F6A6A ;
+	float:auto;
+}
+.personal_inf h1{
+	font-size:25px;
+	font-weight:bold;
+	color : #0033cc;
+}
+@media only screen and (max-width:700px){
+	.my_story{
+		width : 90%;
+		margin-right:5%;
+		margin-left :5%;
+		float : none;
+	}
+	.image img{
+		width : 50%;
+		margin-left : 25%;
+		float : none;
+	}
+	.personal_info{
+		width : 90%;
+		margin-right:5%;
+		margin-left :5%;
+		float : none;
+	}
+}
